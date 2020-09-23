@@ -7,7 +7,7 @@
 ## Install
 
 ```bash
-npm install --save react-org-chart
+yarn add  react-org-chart
 ```
 
 ## Usage
