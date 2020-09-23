@@ -4,25 +4,19 @@
 
 [![NPM](https://img.shields.io/npm/v/react-org-chart.svg)](https://www.npmjs.com/package/react-org-chart) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-## Install
-
-```bash
-yarn add  react-org-chart
-```
 
 ## Usage
 
-```jsx
-import React, { Component } from 'react'
+```bash
 
-import MyComponent from 'react-org-chart'
-import 'react-org-chart/dist/index.css'
+//root
+yarn start
+    
+    then
 
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
-}
+    cd example
+    yarn start
+
 ```
 
 ## License
