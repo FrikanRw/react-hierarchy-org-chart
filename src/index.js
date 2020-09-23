@@ -5,6 +5,7 @@ import styles from './styles.module.css'
 export const OrganisationalChart = ({ data, onNodeClick }) => {
   const d3Container = useRef(null)
   const [chart, setChart] = useState(null)
+  const [id, setId] = useState('O-498')
 
   useLayoutEffect(() => {
     if (data && d3Container.current) {
@@ -12,11 +13,12 @@ export const OrganisationalChart = ({ data, onNodeClick }) => {
       if (!chart) {
         newChart = new TreeChart()
       }
+      console.log(data)
 
       newChart
         .container(d3Container.current)
         .data(data)
-        .svgWidth(500)
+        .svgWidth(1000)
         .svgHeight(500)
         .initialZoom(0.4)
         .onNodeClick((d) => {
@@ -34,7 +36,13 @@ export const OrganisationalChart = ({ data, onNodeClick }) => {
   return (
     <div>
       <div ref={d3Container} />
-      <button onClick={() => chart.locate('O-917')}>Locate</button>
+      <input
+        value={id}
+        onChange={(e) => {
+          setId(`${e.target.value}`)
+        }}
+      />
+      <button onClick={() => chart.locate(id)}>Locate</button>
     </div>
   )
 }

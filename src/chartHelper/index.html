@@ -709,6 +709,7 @@ function drawOrganizationChart(params) {
   var svg = d3.select(attrs.selector)
     .append("svg")
     .attr("width", attrs.width)
+    .attr("id", 'svgContainer')
     .attr("height", attrs.height)
     .call(zoomBehaviours)
     .append("g")
@@ -1007,12 +1008,6 @@ function drawOrganizationChart(params) {
         }
       });
       
-     
-      
-      
-      
-    
-
       // normalize for width/height
       var new_x = (-x + (window.innerWidth / 2));
       var new_y = (-y + (window.innerHeight / 2));

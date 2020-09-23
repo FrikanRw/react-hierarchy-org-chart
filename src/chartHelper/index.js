@@ -5,8 +5,8 @@ class TreeChart {
     // Exposed variables
     const attrs = {
       id: `ID${Math.floor(Math.random() * 1000000)}`, // Id for event handlings
-      svgWidth: 800,
-      svgHeight: 600,
+      svgWidth: 100,
+      svgHeight: 100,
       marginTop: 0,
       marginBottom: 0,
       marginRight: 0,
@@ -150,22 +150,10 @@ class TreeChart {
 
     const attrs = this.getChartState()
     const thisObjRef = this
-    const dynamic = {}
-    dynamic.nodeImageWidth = (attrs.nodeHeight * 100) / 140
-    dynamic.nodeImageHeight = attrs.nodeHeight - 2 * attrs.nodePadding
-    dynamic.nodeTextLeftMargin = attrs.nodePadding * 2 + dynamic.nodeImageWidth
-    dynamic.rootNodeLeftMargin = attrs.width / 2
-    dynamic.nodePositionNameTopMargin =
-      attrs.nodePadding + 8 + (dynamic.nodeImageHeight / 4) * 1
-    dynamic.nodeChildCountTopMargin =
-      attrs.nodePadding + 14 + (dynamic.nodeImageHeight / 4) * 3
-
-    attrs.root.x0 = 0
-    attrs.root.y0 = dynamic.rootNodeLeftMargin
     // Drawing containers
     const container = d3.select(attrs.container)
     const containerRect = container.node().getBoundingClientRect()
-    if (containerRect.width > 0) attrs.svgWidth = containerRect.width
+    // if (containerRect.width > 0) attrs.svgWidth = containerRect.width
 
     // Attach drop shadow id to attrs object
     this.setDropShadowId(attrs)
@@ -248,6 +236,7 @@ class TreeChart {
 
     // *************************  DRAWING **************************
     // Add svg
+    console.log('svg', attrs.svgWidth, attrs.svgHeight)
     const svg = container
       .patternify({
         tag: 'svg',
@@ -846,41 +835,29 @@ class TreeChart {
       d.y0 = d.y
     })
 
-    if (param && param.locate) {
-      console.log('Here')
-      let element = null
-      let x
-      let w
-      let h
-      let y
-      nodes.forEach(function (d) {
-        if (d.id === param.locate) {
-          console.log(d)
-          element = d
-          x = d.x
-          h = d.height
-          w = d.width
-          y = d.y
-        }
-      })
-      const elementById = d3.select(`#${element.id}`).node()
-      console.log('BB', elementById)
-      console.log(attrs)
-      console.log(attrs.lastTransform)
-      console.log({ x, y, w, h })
-      console.log(x - w / 2, y - h / 2)
-      console.log(calc)
-      const transform = attrs.lastTransform
-      const chart = attrs.svg.node()
-      // transform.k = attrs.lastTransform ? attrs.lastTransform.k : 1
-      // transform.x = chart.width.baseVal.value / 2 - (x - w / 2)
-      // transform.y = chart.height.baseVal.value / 2 - (y - h / 2)
-      // console.log(transform)
+    setTimeout(() => {
+      if (param && param.locate) {
+        let x
+        let y
+        let depth
+        nodes.forEach(function (d) {
+          if (d.id === param.locate) {
+            depth = d.depth
+            x = d.x
+            y = d.y
+          }
+        })
 
-      // attrs.chart.attr('transform', transform)
-      // attrs.behaviors.zoom.translateBy(attrs.chart, transform.x, transform.y)
-      // attrs.chart.attr('transform', transform.toString())
-    }
+        //
+        const boundingRect = d3.select('.chart').node().getBBox()
+        console.log(boundingRect.height)
+        const newX = -x + window.innerWidth / 2
+        const newY = -y + window.innerHeight / 2
+        console.log('x', newX)
+        console.log('Y', newY)
+        attrs.chart.attr('transform', `translate(${newX},${newY}) scale(1)`)
+      }
+    }, 1850)
   }
 
   redraw() {
@@ -1139,7 +1116,6 @@ class TreeChart {
 
     // Store it
     attrs.lastTransform = transform
-    // Reposition and rescale chart accordingly
     chart.attr('transform', transform)
 
     // Apply new styles to the foreign object element
