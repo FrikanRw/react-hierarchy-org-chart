@@ -172,7 +172,6 @@ class TreeChart {
     calc.chartWidth = attrs.svgWidth - attrs.marginRight - calc.chartLeftMargin
     calc.chartHeight =
       attrs.svgHeight - attrs.marginBottom - calc.chartTopMargin
-    attrs.calc = calc
 
     // Get maximum node width and height
     calc.nodeMaxWidth = d3.max(attrs.data, ({ width }) => width)
@@ -181,7 +180,7 @@ class TreeChart {
     // Calculate max node depth (it's needed for layout heights calculation)
     attrs.depth = calc.nodeMaxHeight + 100
     calc.centerX = calc.chartWidth / 2
-
+    attrs.calc = calc
     //* *******************  LAYOUTS  ***********************
     const layouts = {
       treemap: null
@@ -200,7 +199,7 @@ class TreeChart {
     }
 
     // Get zooming function
-    behaviors.zoom = d3.zoom().on('zoom', (d) => this.zoomed(d))
+    behaviors.zoom = d3.zoom().on('zoom', (e) => this.zoomed(e))
 
     attrs.behaviors = behaviors
     //* ***************** ROOT node work ************************
@@ -752,7 +751,7 @@ class TreeChart {
       .attr('rx', ({ data }) => data.borderRadius || 0)
       .attr('stroke-width', ({ data }) => {
         if (param && data.nodeId === param.locate) {
-          return '10'
+          return '5'
         }
         return data.borderWidth || attrs.strokeWidth
       })
@@ -834,30 +833,31 @@ class TreeChart {
       d.x0 = d.x
       d.y0 = d.y
     })
+    // navigate to located node
 
-    setTimeout(() => {
-      if (param && param.locate) {
-        let x
-        let y
-        let depth
-        nodes.forEach(function (d) {
-          if (d.id === param.locate) {
-            depth = d.depth
-            x = d.x
-            y = d.y
-          }
-        })
+    if (param && param.locate) {
+      let x
+      let y
+      nodes.forEach(function (d) {
+        if (d.id === param.locate) {
+          x = d.x
+          y = d.y
+        }
+      })
+      const newZoom = 2
+      const normalizedTochartX = x * attrs.initialZoom + attrs.calc.centerX
+      const normalizedTochartY =
+        y * attrs.initialZoom + attrs.calc.nodeMaxHeight / 2
 
-        //
-        const boundingRect = d3.select('.chart').node().getBBox()
-        console.log(boundingRect.height)
-        const newX = -x + window.innerWidth / 2
-        const newY = -y + window.innerHeight / 2
-        console.log('x', newX)
-        console.log('Y', newY)
-        attrs.chart.attr('transform', `translate(${newX},${newY}) scale(1)`)
-      }
-    }, 1850)
+      const newX = -normalizedTochartX * newZoom + attrs.svgWidth / 2
+      const newY = -normalizedTochartY * newZoom + attrs.svgHeight / 2
+      const t = d3.zoomIdentity.translate(newX, newY).scale(newZoom)
+
+      attrs.svg
+        .transition()
+        .duration(attrs.duration)
+        .call(attrs.behaviors.zoom.transform, t)
+    }
   }
 
   redraw() {
