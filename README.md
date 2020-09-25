@@ -1,14 +1,14 @@
-# react-org-chart
+# react-hierarchy-org-chart
 
 > An organisational chart component for react
 
-[![NPM](https://img.shields.io/npm/v/react-org-chart.svg)](https://www.npmjs.com/package/react-org-chart) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/react-hierarchy-org-chart.svg)](https://www.npmjs.com/package/react-hierarchy-org-chart) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 
 ## Usage
 
 ```bash
-yarn add react-org-chart
+yarn add react-hierarchy-org-chart
 ```
 
 ## License

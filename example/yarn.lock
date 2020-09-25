@@ -523,7 +523,7 @@ iconv-lite@0.4:
   version "0.0.0"
   uid ""
 
-"react-org-chart@link:..":
+"react-hierarchy-org-chart@link:..":
   version "0.0.0"
   uid ""
 

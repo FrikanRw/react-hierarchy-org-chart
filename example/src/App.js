@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import * as d3 from 'd3';
-import { OrganisationalChart } from 'react-org-chart'
-import 'react-org-chart/dist/index.css'
+import { OrganisationalChart } from 'react-hierarchy-org-chart'
+import 'react-hierarchy-org-chart/dist/index.css'
 
 const App = () => {
 const [state, setstate] = useState(null)
@@ -15,7 +15,6 @@ const [state, setstate] = useState(null)
 
 
   return <OrganisationalChart 
-  
   data={state}
   onNodeClick={node=>console.log(node)} />
 }

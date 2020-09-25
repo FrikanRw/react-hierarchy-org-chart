@@ -1,5 +1,5 @@
 {
-  "name": "react-org-chart-example",
+  "name": "react-hierarchy-org-chart-example",
   "homepage": ".",
   "version": "0.0.0",
   "private": true,
@@ -13,7 +13,7 @@
     "d3": "^6.1.1",
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
-    "react-org-chart": "link:..",
+    "react-hierarchy-org-chart": "link:..",
     "react-scripts": "link:../node_modules/react-scripts"
   },
   "devDependencies": {
