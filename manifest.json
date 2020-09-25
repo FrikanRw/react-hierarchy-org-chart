@@ -1,6 +1,6 @@
 {
-  "short_name": "react-org-chart",
-  "name": "react-org-chart",
+  "short_name": "react-hierarchy-org-chart",
+  "name": "react-hierarchy-org-chart",
   "icons": [
     {
       "src": "favicon.ico",
