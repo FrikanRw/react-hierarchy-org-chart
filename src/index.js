@@ -22,7 +22,6 @@ const OrganizationalChart = React.forwardRef(({ data, onNodeClick }, ref) => {
         .svgHeight(500)
         .initialZoom(0.4)
         .onNodeClick((d) => {
-          console.log(d + ' node clicked')
           onNodeClick(d)
         })
         .render()
