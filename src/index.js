@@ -32,13 +32,6 @@ const OrganizationalChart = React.forwardRef(({ data, onNodeClick }, ref) => {
   return (
     <div>
       <div ref={d3Container} />
-      <input
-        value={id}
-        onChange={(e) => {
-          setId(`${e.target.value}`)
-        }}
-      />
-      <button onClick={() => chart.locate(id)}>Locate</button>
     </div>
   )
 })
