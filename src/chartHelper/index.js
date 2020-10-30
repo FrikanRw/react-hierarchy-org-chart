@@ -874,7 +874,7 @@ class TreeChart {
     return window.navigator.userAgent.includes('Edge')
   }
 
-  /* Function converts rgba objects to rgba color string 
+  /* Function converts rgba objects to rgba color string
       {red:110,green:150,blue:255,alpha:1}  => rgba(110,150,255,1)
     */
   rgbaObjToColor({ red, green, blue, alpha }) {
