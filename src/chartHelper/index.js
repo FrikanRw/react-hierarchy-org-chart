@@ -149,11 +149,8 @@ class TreeChart {
     // InnerFunctions which will update visuals
 
     const attrs = this.getChartState()
-    const thisObjRef = this
     // Drawing containers
     const container = d3.select(attrs.container)
-    const containerRect = container.node().getBoundingClientRect()
-    // if (containerRect.width > 0) attrs.svgWidth = containerRect.width
 
     // Attach drop shadow id to attrs object
     this.setDropShadowId(attrs)
@@ -376,8 +373,6 @@ class TreeChart {
 
     d3.select(window).on(`resize.${attrs.id}`, () => {
       const containerRect = container.node().getBoundingClientRect()
-      //  if (containerRect.width > 0) attrs.svgWidth = containerRect.width;
-      //	main();
     })
 
     return this
