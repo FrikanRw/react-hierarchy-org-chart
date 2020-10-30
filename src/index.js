@@ -14,7 +14,6 @@ const OrganizationalChart = React.forwardRef(({ data, onNodeClick }, ref) => {
       if (!chart) {
         newChart = new TreeChart()
       }
-      console.log(data)
 
       newChart
         .container(d3Container.current)
@@ -30,9 +29,7 @@ const OrganizationalChart = React.forwardRef(({ data, onNodeClick }, ref) => {
       setChart(newChart)
     }
   }, [data, d3Container.current])
-  if (chart) {
-    console.log(chart)
-  }
+
   return (
     <div>
       <div ref={d3Container} />

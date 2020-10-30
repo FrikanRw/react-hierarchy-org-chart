@@ -235,7 +235,7 @@ class TreeChart {
 
     // *************************  DRAWING **************************
     // Add svg
-    console.log('svg', attrs.svgWidth, attrs.svgHeight)
+  
     const svg = container
       .patternify({
         tag: 'svg',
@@ -862,7 +862,7 @@ class TreeChart {
 
   redraw() {
     const attrs = this.getChartState()
-    // console.log("here", d3.event.translate, d3.event.scale);
+
     attrs.svg.attr(
       'transform',
       'translate(' + d3.event.translate + ')' + ' scale(' + d3.event.scale + ')'
