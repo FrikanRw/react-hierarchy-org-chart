@@ -948,25 +948,7 @@ class TreeChart {
     this.update(d)
   }
 
-  // This function changes `expanded` property to descendants
-  setExpansionFlagToChildren({ data, children, _children }, flag) {
-    // Set flag to the current property
-    data.expanded = flag
 
-    // Loop over and recursively update expanded children's descendants
-    if (children) {
-      children.forEach((d) => {
-        this.setExpansionFlagToChildren(d, flag)
-      })
-    }
-
-    // Loop over and recursively update collapsed children's descendants
-    if (_children) {
-      _children.forEach((d) => {
-        this.setExpansionFlagToChildren(d, flag)
-      })
-    }
-  }
 
   // This function can be invoked via chart.setExpanded API, it expands or collapses particular node
   setExpanded(id, expandedFlag) {
