@@ -14,7 +14,6 @@ const OrganizationalChart = React.forwardRef(({ data, onNodeClick }, ref) => {
       if (!chart) {
         newChart = new TreeChart()
       }
-      console.log(data)
 
       newChart
         .container(d3Container.current)
@@ -23,26 +22,16 @@ const OrganizationalChart = React.forwardRef(({ data, onNodeClick }, ref) => {
         .svgHeight(500)
         .initialZoom(0.4)
         .onNodeClick((d) => {
-          console.log(d + ' node clicked')
           onNodeClick(d)
         })
         .render()
       setChart(newChart)
     }
   }, [data, d3Container.current])
-  if (chart) {
-    console.log(chart)
-  }
+
   return (
     <div>
       <div ref={d3Container} />
-      <input
-        value={id}
-        onChange={(e) => {
-          setId(`${e.target.value}`)
-        }}
-      />
-      <button onClick={() => chart.locate(id)}>Locate</button>
     </div>
   )
 })

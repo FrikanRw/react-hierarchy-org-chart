@@ -149,11 +149,8 @@ class TreeChart {
     // InnerFunctions which will update visuals
 
     const attrs = this.getChartState()
-    const thisObjRef = this
     // Drawing containers
     const container = d3.select(attrs.container)
-    const containerRect = container.node().getBoundingClientRect()
-    // if (containerRect.width > 0) attrs.svgWidth = containerRect.width
 
     // Attach drop shadow id to attrs object
     this.setDropShadowId(attrs)
@@ -235,7 +232,7 @@ class TreeChart {
 
     // *************************  DRAWING **************************
     // Add svg
-    console.log('svg', attrs.svgWidth, attrs.svgHeight)
+  
     const svg = container
       .patternify({
         tag: 'svg',
@@ -376,8 +373,6 @@ class TreeChart {
 
     d3.select(window).on(`resize.${attrs.id}`, () => {
       const containerRect = container.node().getBoundingClientRect()
-      //  if (containerRect.width > 0) attrs.svgWidth = containerRect.width;
-      //	main();
     })
 
     return this
@@ -862,7 +857,7 @@ class TreeChart {
 
   redraw() {
     const attrs = this.getChartState()
-    // console.log("here", d3.event.translate, d3.event.scale);
+
     attrs.svg.attr(
       'transform',
       'translate(' + d3.event.translate + ')' + ' scale(' + d3.event.scale + ')'
@@ -953,25 +948,7 @@ class TreeChart {
     this.update(d)
   }
 
-  // This function changes `expanded` property to descendants
-  setExpansionFlagToChildren({ data, children, _children }, flag) {
-    // Set flag to the current property
-    data.expanded = flag
 
-    // Loop over and recursively update expanded children's descendants
-    if (children) {
-      children.forEach((d) => {
-        this.setExpansionFlagToChildren(d, flag)
-      })
-    }
-
-    // Loop over and recursively update collapsed children's descendants
-    if (_children) {
-      _children.forEach((d) => {
-        this.setExpansionFlagToChildren(d, flag)
-      })
-    }
-  }
 
   // This function can be invoked via chart.setExpanded API, it expands or collapses particular node
   setExpanded(id, expandedFlag) {
